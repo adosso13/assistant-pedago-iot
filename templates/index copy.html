@@ -40,14 +40,13 @@
         <p class="subtitle">
             Posez vos questions, relevez des défis, testez vos connaissances : votre coach IoT est là
         </p>
+
         <div class="fonctionnalité">
             <a href="{{ url_for('qcm') }}">Création d’un quiz de 5 questions</a>
             <a href="{{ url_for('challenge') }}">Challenger vous selon les thèmes de l’IOT</a>
         </div>
-        <form action="submit">
-            <textarea placeholder="Poser une question..."></textarea>
-            <button type="submit">soumission</button>
-        </form>
+
+        <textarea placeholder="Poser une question..."></textarea>
     </main>
 </body>
 </html>

@@ -49,7 +49,6 @@ Le système pose une question à l’utilisateur L’utilisateur répond
 - SQLite (scores, historique)
 
 ## 🏗️ Architecture du projet
-pass a completer 
 
 ## 🚀 Installation
 pass a completer 
