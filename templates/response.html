@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réponse</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <script src="/static/js/script.js" defer></script>
-    <title>Assistant IoT</title>
 </head>
-
 <body>
     <aside class="sidebar">
         <div class="sidebar-actions">
@@ -34,14 +33,12 @@
             </div>
         </div>
     </aside>
-    
     <main>
-        <p class="subtitle">
-            Posez vos questions, relevez des défis, testez vos connaissances : votre coach IoT est là
-        </p>
-        <div class="fonctionnalité">
-            <a href="{{ url_for('qcm') }}">Création d’un quiz de 5 questions</a>
-            <a href="{{ url_for('challenge') }}">Challenger vous selon les thèmes de l’IOT</a>
+        <div>
+            <p>{{ question }}</p>
+        </div> 
+        <div>
+            <p>Je suis en train de créer un questionnaire de 10 questions. Donne-moi de réponse en fonction de la note.</p>
         </div>
         <form class="question_poser" action="/submit" method="POST">
             <textarea name="question" placeholder="Poser une question..."></textarea>
@@ -64,6 +61,6 @@
                 </button>
             </div>
         </div>
-    </main>
+    </main> 
 </body>
 </html>

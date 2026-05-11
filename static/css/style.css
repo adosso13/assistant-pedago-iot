@@ -102,24 +102,32 @@ button:hover{
     background-color: #D9D9D9;
 }
 
-form{
+.question_poser {
     width: 100%;
-    display: flex
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background-color: white;
+    border-radius: 6px;
+    border: 1px solid #0000003b;
+    padding: 10px;
+    gap: 10px;
 }
 
-form button{
-    width: 100px;;
+.question_poser button {
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
 }
 
 textarea {
     width: 100%;
-    max-width: 840px;
     height: 120px;
-    border: 1px solid #0000003b;
+    border: none;
     padding: 20px;
     font-size: 14px;
-    border-radius: 6px;
     resize: none;
+    outline: none;
 }
 
 p{
