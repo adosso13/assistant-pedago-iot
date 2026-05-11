@@ -11,7 +11,7 @@
 <body>
     <aside class="sidebar">
         <div class="sidebar-actions">
-            <button class="btn"><p>Recherche</p></button>
+            <button class="btn" id="btnresearch"><p>Recherche</p></button>
             <button class="btn"><p>Nouveau chat</p></button>
             <a class="link" href="{{ url_for('qcm') }}">Nouveau Quiz</a>
             <a class="link" href="{{ url_for('challenge') }}">Nouveau Challenge</a>
@@ -34,7 +34,6 @@
             </div>
         </div>
     </aside>
-
     
     <main>
         <p class="subtitle">
@@ -48,6 +47,16 @@
             <textarea placeholder="Poser une question..."></textarea>
             <button type="submit">soumission</button>
         </form>
+        <div class="blockresearch" id="blockresearchid">
+            <input type="text" placeholder="Comment puis je vous aider">
+            <br><br>
+            <button type="button">
+                <p>Durée de la piscine 42</p>
+            </button>
+            <button type="button">
+                <p>Durée de la piscine 42</p>
+            </button>
+        </div>
     </main>
 </body>
 </html>

@@ -11,8 +11,8 @@
 <body>
     <aside class="sidebar">
         <div class="sidebar-actions">
-            <button class="btn"><p>Recherche</p></button>
-            <button class="btn"><p>Nouveau chat</p></button>
+            <button class="btn" id="btnresearch"><p>Recherche</p></button>
+            <a class="link" href="{{ url_for('home') }}">Nouveau chat</a>
             <a class="link" href="{{ url_for('qcm') }}">Nouveau Quiz</a>
             <a class="link" href="{{ url_for('challenge') }}">Nouveau Challenge</a>
         </div>
@@ -49,7 +49,9 @@
                 <br>
                 <div>
                     <input type="radio" id="python" name="q1">
-                    <label for="python">Python</label>                
+                    <label for="python">
+                        <p>Python</p>
+                    </label>                
                 </div>
                 <br>    
                 <div>
@@ -58,9 +60,6 @@
                 </div>
                 <br>                            
             </div>
-
-
-            <button type="submit">Envoyer</button>
 
             <!-- Question 2 -->
             
@@ -100,6 +99,25 @@
             <!-- Bouton -->
              <!--
         -->
-        </form>    
+            <button type="submit">Envoyer</button>
+        </form>
+        <div class="blockresearch" id="blockresearchid">
+            <div>
+                <input type="text" placeholder="Comment puis je vous aider">                
+                <button type="button" class="btnechap" id="btnechap">
+                    <p>echap</p>
+                </button>
+            </div>
+            <br>
+            <div>
+                <button type="button">
+                    <p>Durée de la piscine 42</p>
+                </button>
+                <button type="button">
+                    <p>Durée de la piscine 42</p>
+                </button>
+            </div>
+        </div>
+    </main>   
 </body>
 </html>
