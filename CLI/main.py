@@ -1,8 +1,9 @@
+import os
 from agent_LLM import agent
 from sentence_transformers import SentenceTransformer
 from groq import Groq
 
-GROQ_API_KEY = "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"
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 def main():
 
