@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -6,7 +6,6 @@ app = Flask(__name__)
 #page d'accuil
 def home():
     return render_template('index.html')
-
 
 @app.route('/submit', methods=['POST'])
 def submit():

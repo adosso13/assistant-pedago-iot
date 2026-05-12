@@ -167,7 +167,8 @@ label{
 }
 
 h1{
-    font-size: 32px
+    font-size: 32px; 
+    font-weight: 300;
 }
 
 .blockresearch{
@@ -209,12 +210,14 @@ h1{
 
 .main_response {
     display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
     flex-direction: column;
 }
 
 .main_response > div:first-child {
     justify-content: space-between;
-    align-items: flex-end;
+    align-self: flex-end;
     background-color: #D9D9D9;
     padding: 10px;
     border-radius: 12px;
