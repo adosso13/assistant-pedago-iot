@@ -1,4 +1,8 @@
+"""
+Ce fichier sera surement supprimé !
+
 from CLI.main import main
 
 if __name__ == "__main__":
     main()
+"""
