@@ -8,32 +8,7 @@
     <script src="/static/js/script.js" defer></script>
 </head>
 <body>
-    <aside class="sidebar">
-        <div class="sidebar-actions">
-            <button class="btn" id="btnresearch"><p>Recherche</p></button>
-            <a class="link" href="{{ url_for('home') }}">Nouveau chat</a>
-            <a class="link" href="{{ url_for('qcm') }}">Nouveau Quiz</a>
-            <a class="link" href="{{ url_for('challenge') }}">Nouveau Challenge</a>
-        </div>
-
-        <div class="sidebar-history">
-            <div class="section">
-                <p class="section-title">Chat récent</p>
-                <button class="btn-small">Durée de la pin</button>
-            </div>
-
-            <div class="section">
-                <p class="section-title">Challenge récent</p>
-                <button class="btn-small">Durée de la pin</button>
-            </div>
-
-            <div class="section">
-                <p class="section-title">Quiz récent</p>
-                <button class="btn-small">Durée de la pin</button>
-            </div>
-        </div>
-    </aside>
-    <main>
+    <main class="main_response">
         <div>
             <p>{{ question }}</p>
         </div> 
@@ -44,23 +19,6 @@
             <textarea name="question" placeholder="Poser une question..."></textarea>
             <button type="submit">Envoyer</button>
         </form>
-        <div class="blockresearch" id="blockresearchid">
-            <div>
-                <input type="text" placeholder="Comment puis je vous aider">                
-                <button type="button" class="btnechap" id="btnechap">
-                    <p>echap</p>
-                </button>
-            </div>
-            <br>
-            <div>
-                <button type="button">
-                    <p>Durée de la piscine 42</p>
-                </button>
-                <button type="button">
-                    <p>Durée de la piscine 42</p>
-                </button>
-            </div>
-        </div>
     </main> 
 </body>
 </html>
