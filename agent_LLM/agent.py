@@ -1,4 +1,5 @@
 import os
+import sys
 import PyPDF2
 import faiss
 import numpy as np
@@ -7,14 +8,15 @@ from groq import Groq
 
 class AgentLLM:
     
-    PDF_PATH     = "agent_LLM/static/BLE.pdf" # chemin vers le PDF
+    # PDF_PATH     = "agent_LLM/static/BLE.pdf" # chemin vers le PDF
+    PDF_PATH     = "/home/haroun/Bureau/Assistant-Pedago-iot/agent_LLM/static/BLE.pdf" # chemin vers le PDF
     MODEL        = "llama-3.3-70b-versatile"  # ou "llama3-70b-8192" pour le grand modèle
     CHUNK_SIZE   = 500                        # taille des chunks en caractères
     TOP_K        = 3                          # nombre de chunks récupérés par requête
-
+    
     def __init__(self):
         pass
-
+    
     def load_pdf(self) -> list:
         """
         LECTURE ET DÉCOUPAGE DU PDF
