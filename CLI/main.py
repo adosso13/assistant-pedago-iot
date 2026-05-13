@@ -7,7 +7,7 @@ from agent_LLM import agent
 from sentence_transformers import SentenceTransformer
 from groq import Groq
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+from config import GROQ_API_KEY
 
 def main():
 
