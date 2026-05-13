@@ -10,3 +10,11 @@ btnresearch.addEventListener("click", () => {
 btnechap.addEventListener("click", () => {
   blockresearchid.style.display = "none";
 })
+
+
+const blockquestion1 = document.getElementById("QCM1id");
+const btnext = document.getElementById("Q2");
+
+btnext.addEventListener("click", () => {
+  blockquestion1.style.display = "none";
+}); 
