@@ -3,6 +3,18 @@ from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from agent_LLM import agent
+from sentence_transformers import SentenceTransformer
+from groq import Groq
+
+
+print("Initialisation de l'agent IoT...")
+LLM = agent.AgentLLM()
+chunks = LLM.load_pdf()
+embedder = SentenceTransformer("all-MiniLM-L6-v2")
+index = LLM.build_index(chunks, embedder)
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+
 
 app = Flask(__name__)
 
@@ -100,8 +112,21 @@ def logout():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    question = request.form['question']
-    return render_template('response.html', question=question)
+    # 1. Récupérer la question du formulaire
+    question = request.form.get('question')
+    
+    if not question:
+        return redirect(url_for('home'))
+
+    # 2. Utiliser la logique de ton main.py
+    # On récupère le contexte via RAG
+    context = LLM.search(question, index, chunks, embedder)
+    
+    # On génère la réponse avec le LLM
+    reponse = LLM.ask(question, context, client)
+
+    # 3. Envoyer la réponse au template HTML
+    return render_template('response.html', question=question, reponse=reponse)
 
 
 @app.route('/qcm')

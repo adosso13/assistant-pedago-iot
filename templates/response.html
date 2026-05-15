@@ -19,48 +19,54 @@
         <div class="sidebar-history">
             <div class="section">
                 <p class="section-title">Chat récent</p>
-                <button class="btn-small">Durée de la pin</button>
+                <button class="btn-small">
+                    <p>Durée de la pin</p>
+                </button>
+                <button class="btn-small">
+                    <p>Durée de la pin</p>
+                </button>            
             </div>
 
             <div class="section">
                 <p class="section-title">Challenge récent</p>
-                <button class="btn-small">Durée de la pin</button>
+                <button class="btn-small">
+                    <p>Durée de la pin</p>
+                </button>                
+                <button class="btn-small">
+                    <p>Durée de la pin</p>
+                </button>            
             </div>
 
             <div class="section">
                 <p class="section-title">Quiz récent</p>
                 <button class="btn-small">Durée de la pin</button>
+                <button class="btn-small">Durée de la pin</button>
             </div>
+        </div>
+
+        <div>
+            <div><p>A</p></div>
+            <a href="{{ url_for('login') }}">Retour à l'accueil</a>
         </div>
     </aside>
+
+
     <main class="main_response">
-        <div>
-            <p>{{ question }}</p>
+        <div class="user-query">
+            <p><strong>Vous :</strong> {{ question }}</p>
         </div> 
-        <div>
-            <p>Je suis en train de créer un questionnaire de 10 questions. Donne-moi de réponse en fonction de la note.</p>
+    
+        <div class="ai-reply">
+            <p><strong>Assistant IoT :</strong></p>
+            <div class="response-content">
+                {{ reponse | safe }}
+            </div>
         </div>
+    
         <form class="question_poser" action="/submit" method="POST">
-            <textarea name="question" placeholder="Poser une question..."></textarea>
+            <textarea name="question" placeholder="Poser une autre question..."></textarea>
             <button type="submit">Envoyer</button>
         </form>
-        <div class="blockresearch" id="blockresearchid">
-            <div>
-                <input type="text" placeholder="Comment puis je vous aider">                
-                <button type="button" class="btnechap" id="btnechap">
-                    <p>echap</p>
-                </button>
-            </div>
-            <br>
-            <div>
-                <button type="button">
-                    <p>Durée de la piscine 42</p>
-                </button>
-                <button type="button">
-                    <p>Durée de la piscine 42</p>
-                </button>
-            </div>
-        </div>
-    </main> 
+    </main>
 </body>
 </html>
