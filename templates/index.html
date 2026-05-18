@@ -1,85 +1,17 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <script src="/static/js/script.js" defer></script>
-    <title>Assistant IoT</title>
-</head>
+{% extends "layout/base.html" %}
 
-<body>
-    <aside class="sidebar">
-        <div class="sidebar-actions">
-            <button class="btn" id="btnresearch"><p>Recherche</p></button>
-            <a class="link" href="{{ url_for('home') }}">Nouveau chat</a>
-            <a class="link" href="{{ url_for('qcm') }}">Nouveau Quiz</a>
-            <a class="link" href="{{ url_for('challenge') }}">Nouveau Challenge</a>
-        </div>
+{% block title %}Assistant IoT{% endblock %}
 
-        <div class="sidebar-history">
-            <div class="section">
-                <p class="section-title">Chat récent</p>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>            
-            </div>
-
-            <div class="section">
-                <p class="section-title">Challenge récent</p>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>                
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>            
-            </div>
-
-            <div class="section">
-                <p class="section-title">Quiz récent</p>
-                <button class="btn-small">Durée de la pin</button>
-                <button class="btn-small">Durée de la pin</button>
-            </div>
-        </div>
-
-        <div>
-            <div><p>A</p></div>
-            <a href="{{ url_for('login') }}">Retour à l'accueil</a>
-        </div>
-    </aside>
-    
-    <main class="home_main">
-        <p class="subtitle">
-            Posez vos questions, relevez des défis, testez vos connaissances : votre coach IoT est là
-        </p>
-        <div class="fonctionnalité">
-            <a href="{{ url_for('qcm') }}">Création d’un quiz de 5 questions</a>
-            <a href="{{ url_for('challenge') }}">Challenger vous selon les thèmes de l’IOT</a>
-        </div>
-        <form class="question_poser" action="/submit" method="POST">
-            <textarea name="question" placeholder="Poser une question..."></textarea>
-            <button type="submit">Envoyer</button>
-        </form>
-        <div class="blockresearch" id="blockresearchid">
-            <div>
-                <input type="text" placeholder="Comment puis je vous aider">                
-                <button type="button" class="btnechap" id="btnechap">
-                    <p>echap</p>
-                </button>
-            </div>
-            <br>
-            <div>
-                <button type="button">
-                    <p>Durée de la piscine 42</p>
-                </button>
-                <button type="button">
-                    <p>Durée de la piscine 42</p>
-                </button>
-            </div>
-        </div>
-    </main>
-</body>
-</html>
+{% block content %}
+<p class="subtitle">
+    Posez vos questions, relevez des défis, testez vos connaissances : votre coach IoT est là
+</p>
+<div class="fonctionnalité">
+    <a href="{{ url_for('qcm') }}">Création d'un quiz de 5 questions</a>
+    <a href="{{ url_for('challenge') }}">Challenger vous selon les thèmes de l'IOT</a>
+</div>
+<form class="question_poser" action="/submit" method="POST">
+    <textarea name="question" placeholder="Poser une question..."></textarea>
+    <button type="submit">Envoyer</button>
+</form>
+{% endblock %}

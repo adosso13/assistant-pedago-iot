@@ -7,6 +7,7 @@ from agent_LLM import agent
 from sentence_transformers import SentenceTransformer
 from groq import Groq
 
+load_dotenv()
 
 print("Initialisation de l'agent IoT...")
 LLM = agent.AgentLLM()
@@ -15,10 +16,8 @@ embedder = SentenceTransformer("all-MiniLM-L6-v2")
 index = LLM.build_index(chunks, embedder)
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-
 app = Flask(__name__)
 
-load_dotenv()
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 # print(f"Ma clé est : {app.config['SECRET_KEY']}") # À supprimer après le test
 
@@ -130,13 +129,11 @@ def submit():
 
 
 @app.route('/qcm')
-@login_required # Seuls les connectés voient le QCM
 def qcm():
     return render_template('qcm.html')
 
 
 @app.route('/challenge')
-@login_required # Seuls les connectés voient le challenge
 def challenge():
     return render_template('challenge.html')
 

@@ -1,4 +1,5 @@
 @import url(../css/layout/aside.css);
+@import url(../css/page/qcm.css);
 
 * {
     margin: 0;
@@ -9,15 +10,37 @@
 
 body{
     display: flex;
-    min-width: 1440px;
+    width: 100%; /* Rendu fluide et adaptatif sur tous les écrans */
     min-height: 100vh;
     background-color: #F5F5F5;
+    overflow-x: hidden; /* modif ia */
+}
+
+body > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between; /* Aligne le bouton à gauche et le nav à droite */
+    align-items: center;
+    padding: 15px 20px 0 20px;
+}
+
+header button{
+    width: auto;
+}
+
+nav {
+    flex: 1;
+    display: flex;
     justify-content: space-between;
 }
 
-.section-title {
-    padding: 10px;
-    font-weight:700;
+nav > div:last-child {
+    display: flex;
 }
 
 main {
@@ -29,6 +52,7 @@ main {
     gap: 25px;
     padding: 20px;
     text-align: center;
+    
 }
 
 .subtitle {
@@ -79,20 +103,19 @@ button{
     width: 271px;
 }
 
-.link:hover{
-    background-color: #D9D9D9;
-}
-
-
 button:hover{
     background-color: #D9D9D9;
 }
 
+.link:hover{
+    background-color: #D9D9D9;
+}
+
 .question_poser {
+    min-width: 750px; /* <-- Ajoute une limite pour un rendu propre style "Chat" */
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
     background-color: white;
     border-radius: 6px;
     border: 1px solid #0000003b;
@@ -107,7 +130,7 @@ button:hover{
 }
 
 textarea {
-    width: 100%;
+    flex: 1;    
     height: 120px;
     border: none;
     padding: 20px;
@@ -120,80 +143,12 @@ p{
     font-size: 14px;
 }
 
-.questionnaire {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.questionnaire > div > div {
-    background-color: #D9D9D9;
-    width: 771px;
-    height: 49px;
-    display: flex;
-    align-items: center;
-    justify-content: baseline;
-    padding-left: 10px;
-    gap: 10px;
-}
-
-.questionnaire button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-label{
-    background-color: #D9D9D9;
-    font-size: 14px;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
-
 h1{
     font-size: 32px; 
     font-weight: 300;
 }
 
-.blockresearch{
-    width: 680px;
-    height: 443px;
-    background-color: #F5F5F5;
-    box-shadow: 0px 4px 8px black;
-    padding: 10px;
-    padding-top: 20px;
-    display: none;
-    position: absolute;
-}
-
-.blockresearch input{
-    width: 100%;
-    font-size: 14px;
-    border: none ;
-    background-color: #F5F5F5;
-    margin-left: 10px;
-}
-
-.blockresearch > div:first-child{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.blockresearch > div:first-child > button{
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.blockresearch > div:last-child > button{
-    width: 100%;
-    height: 40px;
-}
-
+/*
 .main_response {
     display: flex;
     align-items: flex-start;
@@ -206,5 +161,6 @@ h1{
     align-self: flex-end;
     background-color: #D9D9D9;
     padding: 10px;
-    border-radius: 12px;
+    border-radius: 12px
 }
+*/

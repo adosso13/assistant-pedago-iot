@@ -1,138 +1,30 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <script src="/static/js/script.js" defer></script>
-    <title>QCM</title>
-</head>
+{% extends "layout/base.html" %}
 
-<body>
-    <aside class="sidebar">
-        <div class="sidebar-actions">
-            <button class="btn" id="btnresearch"><p>Recherche</p></button>
-            <a class="link" href="{{ url_for('home') }}">Nouveau chat</a>
-            <a class="link" href="{{ url_for('qcm') }}">Nouveau Quiz</a>
-            <a class="link" href="{{ url_for('challenge') }}">Nouveau Challenge</a>
-        </div>
+{% block title %}QCM{% endblock %}
 
-        <div class="sidebar-history">
-            <div class="section">
-                <p class="section-title">Chat récent</p>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>            
-            </div>
-
-            <div class="section">
-                <p class="section-title">Challenge récent</p>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>                
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>            
-            </div>
-
-            <div class="section">
-                <p class="section-title">Quiz récent</p>
-                <button class="btn-small">Durée de la pin</button>
-                <button class="btn-small">Durée de la pin</button>
-            </div>
-        </div>
-
+{% block content %}
+<h1>Questionnaire Développement Web</h1>
+<form class="questionnaire">
+    <!-- Question 1 -->
+    <div>
+        <p>1. Quel langage est utilisé pour structurer une page web ?</p>
+        <br>
         <div>
-            <div><p>A</p></div>
-            <a href="{{ url_for('login') }}">Retour à l'accueil</a>
+            <input type="radio" id="html" name="q1">
+            <label for="html">HTML</label>
         </div>
-    </aside>
-    <main>
-        <h1>Questionnaire Développement Web</h1>
-        <form class="questionnaire">
-            <!-- Question 1 -->
-            <div>
-                <p>1. Quel langage est utilisé pour structurer une page web ?</p>
-                <br>
-                <div>
-                    <input type="radio" id="html" name="q1">
-                    <label for="html">HTML</label>
-                </div>
-                <br>
-                <div>
-                    <input type="radio" id="python" name="q1">
-                    <label for="python">
-                        <p>Python</p>
-                    </label>                
-                </div>
-                <br>    
-                <div>
-                    <input type="radio" id="java" name="q1">
-                    <label for="java">Java</label>               
-                </div>
-                <br>                            
-            </div>
-
-            <!-- Question 2 -->
-            
-        <!-- 
-            <p>2. Quels langages connais-tu ?</p>
-    
-            <input type="checkbox" id="html2">
-            <label for="html2">HTML</label><br>
-    
-            <input type="checkbox" id="css">
-            <label for="css">CSS</label><br>
-    
-            <input type="checkbox" id="js">
-            <label for="js">JavaScript</label><br><br>
-
-        -->
-    
-            <!-- Question 3 -->
-
-            <!--
-            <p>3. Ton niveau en développement web :</p>
-    
-            <select>
-                <option>Débutant</option>
-                <option>Intermédiaire</option>
-                <option>Avancé</option>
-            </select>
-    
-            <br><br>
-    
-            -->
-            <!-- Question 4 -->
-        <!--
-            <p>4. Pourquoi veux-tu apprendre le développement web ?</p>
-            <textarea rows="5" cols="40"></textarea>
-            <br><br>-->
-            <!-- Bouton -->
-             <!--
-        -->
-            <button type="submit">Envoyer</button>
-        </form>
-        <div class="blockresearch" id="blockresearchid">
-            <div>
-                <input type="text" placeholder="Comment puis je vous aider">                
-                <button type="button" class="btnechap" id="btnechap">
-                    <p>echap</p>
-                </button>
-            </div>
-            <br>
-            <div>
-                <button type="button">
-                    <p>Durée de la piscine 42</p>
-                </button>
-                <button type="button">
-                    <p>Durée de la piscine 42</p>
-                </button>
-            </div>
+        <br>
+        <div>
+            <input type="radio" id="python" name="q1">
+            <label for="python"><p>Python</p></label>
         </div>
-    </main>   
-</body>
-</html>
+        <br>
+        <div>
+            <input type="radio" id="java" name="q1">
+            <label for="java">Java</label>
+        </div>
+        <br>
+    </div>
+    <button type="submit">Envoyer</button>
+</form>
+{% endblock %}

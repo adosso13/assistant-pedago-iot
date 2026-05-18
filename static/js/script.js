@@ -1,10 +1,13 @@
-const btnresearch = document.getElementById("btnresearch");
-const blockresearchid = document.getElementById("blockresearchid");
+// Btn pour show le bloc recherche 
 
+const btnsResearch = document.querySelectorAll(".btnresearch");
+const blockresearchid = document.getElementById("blockresearchid");
 const btnechap = document.getElementById("btnechap");
 
-btnresearch.addEventListener("click", () => {
-  blockresearchid.style.display = "block";
+btnsResearch.forEach(btn => {
+  btn.addEventListener("click", () => {
+    blockresearchid.style.display = "block";
+  });
 });
 
 btnechap.addEventListener("click", () => {
@@ -12,9 +15,19 @@ btnechap.addEventListener("click", () => {
 })
 
 
-const blockquestion1 = document.getElementById("QCM1id");
-const btnext = document.getElementById("Q2");
 
-btnext.addEventListener("click", () => {
-  blockquestion1.style.display = "none";
-}); 
+// --- Aside mobile ---
+// querySelectorAll cible TOUS les éléments avec cette classe
+const btnsAside = document.querySelectorAll(".btnaside");
+const showAside = document.getElementById("sidebarmobile");
+const btneexit = document.getElementById("btneexit");
+
+btnsAside.forEach(btn => {
+  btn.addEventListener("click", () => {
+    showAside.style.display = "block";
+  });
+});
+
+btneexit.addEventListener("click", () => {
+  showAside.style.display = "none";
+});

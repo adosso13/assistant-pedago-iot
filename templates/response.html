@@ -1,57 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Réponse</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-    <script src="/static/js/script.js" defer></script>
-</head>
-<body>
-    <aside class="sidebar">
-        <div class="sidebar-actions">
-            <button class="btn" id="btnresearch"><p>Recherche</p></button>
-            <a class="link" href="{{ url_for('home') }}">Nouveau chat</a>
-            <a class="link" href="{{ url_for('qcm') }}">Nouveau Quiz</a>
-            <a class="link" href="{{ url_for('challenge') }}">Nouveau Challenge</a>
-        </div>
+{% extends "layout/base.html" %}
 
-        <div class="sidebar-history">
-            <div class="section">
-                <p class="section-title">Chat récent</p>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>            
-            </div>
+{% block title %}Réponse{% endblock %}
 
-            <div class="section">
-                <p class="section-title">Challenge récent</p>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>                
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>            
-            </div>
-
-            <div class="section">
-                <p class="section-title">Quiz récent</p>
-                <button class="btn-small">Durée de la pin</button>
-                <button class="btn-small">Durée de la pin</button>
-            </div>
-        </div>
-
-        <div>
-            <div><p>A</p></div>
-            <a href="{{ url_for('login') }}">Retour à l'accueil</a>
-        </div>
-    </aside>
-
-
-    <main class="main_response">
+{% block content %}
         <div class="user-query">
             <p><strong>Vous :</strong> {{ question }}</p>
         </div> 
@@ -67,6 +18,4 @@
             <textarea name="question" placeholder="Poser une autre question..."></textarea>
             <button type="submit">Envoyer</button>
         </form>
-    </main>
-</body>
-</html>
+{% endblock %}
