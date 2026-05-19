@@ -11,8 +11,6 @@ aside {
 
 .asideId{
     width: 300px;
-    padding: 300px;
-
     min-height: 100vh;
     background-color: #F5F5F5;
     border-right: 1px solid rgba(0, 0, 0, 0.2);
@@ -25,7 +23,7 @@ aside {
     z-index: 999; /* Reste au-dessus du contenu sur mobile */
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 800px) {
     aside {
         display: none;
     }
@@ -33,6 +31,14 @@ aside {
 
 aside > div:first-child {
     display: flex;
+}
+
+.asideId > div:first-child {
+    display: flex;
+}
+
+.navigateur a button{
+    width: auto;
 }
 
 .sidebar-history {
@@ -76,7 +82,7 @@ aside > div:last-child > div{
     display: none;
 }
 
-@media screen and (max-width:720px) {
+@media screen and (max-width:800px) {
     .depliant_aside {
         display: block;
     }

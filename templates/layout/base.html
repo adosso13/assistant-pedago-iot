@@ -11,11 +11,10 @@
     <aside class="sidebar">
         <div>
             <a class="link" href="{{ url_for('home') }}">LOGO</a>
-            <button type="button">X</button>            
         </div>
         
         <div class="sidebar-actions">
-            <button class="btn" id="btnresearch"><p>Recherche</p></button>
+            <button class="btn btnresearch"><p>Recherche</p></button>
             <a class="link" href="{{ url_for('home') }}">Nouveau chat</a>
             <a class="link" href="{{ url_for('qcm') }}">Nouveau Quiz</a>
             <a class="link" href="{{ url_for('challenge') }}">Nouveau Challenge</a>
@@ -46,9 +45,11 @@
     </aside>
 
     <aside class="asideId" id="sidebarmobile">
-        <a class="link" href="{{ url_for('home') }}">LOGO</a>
-        <div class="sidebar-actions">
+        <div class="navigateur">
+            <a class="link" href="{{ url_for('home') }}">LOGO</a>
             <button id="btneexit"><p>X</p></button>
+        </div>
+        <div class="sidebar-actions">
             <button class="btn btnresearch"><p>Recherche</p></button>
             <a class="link" href="{{ url_for('home') }}">Nouveau chat</a>
             <a class="link" href="{{ url_for('qcm') }}">Nouveau Quiz</a>
@@ -100,6 +101,9 @@
                     <button type="button" class="btnechap" id="btnechap"><p>echap</p></button>
                 </div>
                 <br>
+                <div>
+                    <a class="link" href="{{ url_for('home') }}">Nouveau chat</a>
+                </div>
                 <div>
                     <button type="button"><p>Durée de la piscine 42</p></button>
                     <button type="button"><p>Durée de la piscine 42</p></button>

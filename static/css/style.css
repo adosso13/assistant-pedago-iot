@@ -52,16 +52,35 @@ main {
     gap: 25px;
     padding: 20px;
     text-align: center;
-    
+}
+
+@media screen and (max-width: 600px) {
+    header {
+        padding: 10px;
+    }
+
+    main {
+        padding: 10px;
+    }
 }
 
 .subtitle {
-    max-width: 600px;
+    max-width: 700px;
+    width: 100%;
+    line-height: 1.5;
 }
 
 .fonctionnalité {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
+}
+
+@media screen and (max-width:400px) {
+    .fonctionnalité a {
+        width: 200px;
+    }
 }
 
 main a{
@@ -112,7 +131,7 @@ button:hover{
 }
 
 .question_poser {
-    min-width: 750px; /* <-- Ajoute une limite pour un rendu propre style "Chat" */
+    min-width: 100px; /* <-- Ajoute une limite pour un rendu propre style "Chat" */
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -164,3 +183,16 @@ h1{
     border-radius: 12px
 }
 */
+
+.font_connexion {
+    background-image: url(/static/images/pexels-tanhatamannasyed-35652456.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.interface_de_connexion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
