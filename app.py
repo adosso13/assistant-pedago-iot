@@ -1,4 +1,5 @@
 import os
+
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
@@ -9,10 +10,14 @@ from groq import Groq
 
 load_dotenv()
 
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+
 print("Initialisation de l'agent IoT...")
 LLM = agent.AgentLLM()
 chunks = LLM.load_pdf()
-embedder = SentenceTransformer("all-MiniLM-L6-v2")
+embedder = SentenceTransformer("all-MiniLM-L6-v2", device='cpu')
 index = LLM.build_index(chunks, embedder)
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
@@ -139,4 +144,4 @@ def challenge():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)
