@@ -1,0 +1,28 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Challenge{% endblock %}
+
+{% block content %}
+<h1>Questionnaire Développement Web</h1>
+<form class="questionnaire">
+    <!-- Question 1 -->
+    <p>1. Quel langage est utilisé pour structurer une page web ?</p>
+    <br>
+    <div>
+        <input type="radio" id="html" name="q1">
+        <label for="html">HTML</label>
+    </div>
+    <br>
+    <div>
+        <input type="radio" id="python" name="q1">
+        <label for="python">Python</label>
+    </div>
+    <br>
+    <div>
+        <input type="radio" id="java" name="q1">
+        <label for="java">Java</label>
+    </div>
+    <br>
+    <button type="submit">Envoyer</button>
+</form>
+{% endblock %}

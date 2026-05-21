@@ -1,0 +1,21 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Réponse{% endblock %}
+
+{% block content %}
+        <div class="user-query">
+            <p><strong>Vous :</strong> {{ question }}</p>
+        </div> 
+    
+        <div class="ai-reply">
+            <p><strong>Assistant IoT :</strong></p>
+            <div class="response-content">
+                {{ reponse | safe }}
+            </div>
+        </div>
+    
+        <form class="question_poser" action="/submit" method="POST">
+            <textarea name="question" placeholder="Poser une autre question..."></textarea>
+            <button type="submit">Envoyer</button>
+        </form>
+{% endblock %}

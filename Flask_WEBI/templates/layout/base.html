@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mon Application Flask{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body>
+    <aside class="sidebar">
+        <div>
+            <a class="link" href="{{ url_for('home') }}">LOGO</a>
+        </div>
+        
+        <div class="sidebar-actions">
+            <button class="btn btnresearch"><p>Recherche</p></button>
+            <a class="link" href="{{ url_for('home') }}">Nouveau chat</a>
+            <a class="link" href="{{ url_for('qcm') }}">Nouveau Quiz</a>
+            <a class="link" href="{{ url_for('challenge') }}">Nouveau Challenge</a>
+        </div>
+
+        <div class="sidebar-history">
+            <div class="section">
+                <p class="section-title">Chat récent</p>
+                <button class="btn-small"><p>Durée de la pin</p></button>
+                <button class="btn-small"><p>Durée de la pin</p></button>
+            </div>
+            <div class="section">
+                <p class="section-title">Challenge récent</p>
+                <button class="btn-small"><p>Durée de la pin</p></button>
+                <button class="btn-small"><p>Durée de la pin</p></button>
+            </div>
+            <div class="section">
+                <p class="section-title">Quiz récent</p>
+                <button class="btn-small">Durée de la pin</button>
+                <button class="btn-small">Durée de la pin</button>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <div><p>{{ current_user.email[0].upper() if current_user.is_authenticated else '?' }}</p></div>
+            {% if current_user.is_authenticated %}
+                <a class="link link-logout" href="{{ url_for('logout') }}">Se déconnecter</a>
+            {% else %}
+                <a class="link link-login" href="{{ url_for('login') }}">Se connecter</a>
+            {% endif %}
+        </div> 
+        <!--<div>
+            <div><p>A</p></div>
+            <a href="{{ url_for('login') }}">Retour à l'accueil</a>
+        </div>-->
+    </aside>
+
+    <aside class="asideId" id="sidebarmobile">
+        <div class="navigateur">
+            <a class="link" href="{{ url_for('home') }}">LOGO</a>
+            <button id="btneexit"><p>X</p></button>
+        </div>
+        <div class="sidebar-actions">
+            <button class="btn btnresearch"><p>Recherche</p></button>
+            <a class="link" href="{{ url_for('home') }}">Nouveau chat</a>
+            <a class="link" href="{{ url_for('qcm') }}">Nouveau Quiz</a>
+            <a class="link" href="{{ url_for('challenge') }}">Nouveau Challenge</a>
+        </div>
+
+        <div class="sidebar-history">
+            <div class="section">
+                <p class="section-title">Chat récent</p>
+                <button class="btn-small"><p>Durée de la pin</p></button>
+                <button class="btn-small"><p>Durée de la pin</p></button>
+            </div>
+            <div class="section">
+                <p class="section-title">Challenge récent</p>
+                <button class="btn-small"><p>Durée de la pin</p></button>
+                <button class="btn-small"><p>Durée de la pin</p></button>
+            </div>
+            <div class="section">
+                <p class="section-title">Quiz récent</p>
+                <button class="btn-small">Durée de la pin</button>
+                <button class="btn-small">Durée de la pin</button>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <div><p>{{ current_user.email[0].upper() if current_user.is_authenticated else '?' }}</p></div>
+            {% if current_user.is_authenticated %}
+                <a class="link link-logout" href="{{ url_for('logout') }}">Se déconnecter</a>
+            {% else %}
+                <a class="link link-login" href="{{ url_for('login') }}">Se connecter</a>
+            {% endif %}
+        </div>        
+
+        <!--<div>
+            <div><p>A</p></div>
+            <a href="{{ url_for('login') }}">Retour à l'accueil</a>
+        </div>-->
+    </aside>
+    
+    <div>
+        <header>
+            <nav>
+                <div class="depliant_aside">
+                    <button class="btn btnaside"><p>|||</p></button>
+                </div>
+                <div>
+                    <button>Partager</button>
+                    <button>...</button>
+                </div>
+            </nav>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock %}
+            <div class="blockresearch" id="blockresearchid">
+                <div>
+                    <input type="text" placeholder="Comment puis je vous aider">
+                    <button type="button" class="btnechap" id="btnechap"><p>echap</p></button>
+                </div>
+                <br>
+                <div>
+                    <a class="link" href="{{ url_for('home') }}">Nouveau chat</a>
+                </div>
+                <div>
+                    <button type="button"><p>Durée de la piscine 42</p></button>
+                    <button type="button"><p>Durée de la piscine 42</p></button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
