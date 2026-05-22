@@ -9,6 +9,7 @@ services:
     volumes:
       - .:/app
       - /app/myvenv
+      - hf_cache:/root/.cache/huggingface    # ← monté ici
     # --- AJOUTE CETTE LIGNE ICI ---
     env_file:
       - .env
@@ -16,4 +17,8 @@ services:
     environment:
       - FLASK_ENV=development
       - PYTHONUNBUFFERED=1
-    command: python app.py
+      - PYTHONPATH=/app
+    command: python Flask_WEBI/app.py
+
+volumes:
+  hf_cache:    # ← ET ÇA EN BAS
