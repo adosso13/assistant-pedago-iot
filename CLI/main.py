@@ -39,7 +39,7 @@ def main():
     print("Création des embeddings ...")
     embedder = SentenceTransformer("all-MiniLM-L6-v2")
     index = LLM.build_index(chunks, embedder)
-
+    
     client = Groq(api_key=GROQ_API_KEY)
     
     while True:

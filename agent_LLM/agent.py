@@ -31,15 +31,23 @@ class AgentLLM:
                     if chunk:
                         chunks.append(chunk)
         return chunks
-
-    def build_index(self, chunks: list, embedder: SentenceTransformer):
+    
+    def build_index(self, chunks: list, embedder: SentenceTransformer, index_path: str = "index.faiss"):
         """
         CRÉATION DE L'INDEX VECTORIEL (FAISS)
         """
-        embeddings = embedder.encode(chunks, show_progress_bar=True)
-        embeddings = np.array(embeddings, dtype="float32")
-        index = faiss.IndexFlatL2(embeddings.shape[1])
-        index.add(embeddings)
+        if os.path.exists(index_path):
+            print("Index FAISS trouvé, chargement depuis le fichier ...")
+            index = faiss.read_index(index_path)
+        else:
+            print("Création de l'index FAISS (première fois uniquement) ...")
+            embeddings = embedder.encode(chunks, show_progress_bar = False)
+            embeddings = np.array(embeddings, dtype="float32")
+            index = faiss.IndexFlatL2(embeddings.shape[1])
+            index.add(embeddings)
+            faiss.write_index(index, index_path)
+            print(f"Index sauvegardé dans '{index_path}'")
+        
         return index
 
     def search(self, query: str, index, chunks: list, embedder: SentenceTransformer) -> str:
