@@ -32,11 +32,12 @@ class AgentLLM:
                         chunks.append(chunk)
         return chunks
     
-    def build_index(self, chunks: list, embedder: SentenceTransformer, index_path: str = "index.faiss"):
+    def build_index(self, chunks: list, embedder: SentenceTransformer, memory: bool = True,
+            index_path: str = "index.faiss"):
         """
         CRÉATION DE L'INDEX VECTORIEL (FAISS)
         """
-        if os.path.exists(index_path):
+        if (os.path.exists(index_path) and memory ):
             print("Index FAISS trouvé, chargement depuis le fichier ...")
             index = faiss.read_index(index_path)
         else:
@@ -50,6 +51,7 @@ class AgentLLM:
         
         return index
 
+
     def search(self, query: str, index, chunks: list, embedder: SentenceTransformer) -> str:
         """
         RECHERCHE DES CHUNKS PERTINENTS
@@ -58,29 +60,50 @@ class AgentLLM:
         _, indices = index.search(query_vec, self.TOP_K)
         return "\n\n---\n\n".join(chunks[int(i)] for i in indices[0])
 
-    def ask(self, question: str, context: str, client: Groq) -> str:
+    
+    def ask(self, question: str, context: str, history: list, client: Groq) -> str:
         """
         APPEL À GROQ AVEC LE CONTEXTE RAG
         """
+        # 1. On définit le message système de base
+        messages = [
+            {
+                "role": "system",
+                "content": (
+                    "Tu es un assistant expert. Réponds de manière conversationnelle en te basant "
+                    "uniquement sur le contexte fourni et l'historique de la discussion. "
+                    "Si la réponse n'est pas du tout dans le contexte ni dans l'historique, dis-le clairement."
+                ),
+            }
+        ]
+        
+        # 2. On ajoute l'historique des échanges précédents s'il existe
+        messages.extend(history)
+        
+        # 3. On prépare la nouvelle question de l'utilisateur enrichie du contexte PDF
+        # Note : Intégrer le contexte ici permet au modèle de lier le document à la question actuelle
+        new_user_message = {
+            "role": "user",
+            "content": f"Contexte extrait du PDF :\n{context}\n\nQuestion actuelle : {question}",
+        }
+        messages.append(new_user_message)
+        
+        # 4. Appel à l'API
         response = client.chat.completions.create(
             model = self.MODEL,
-            messages = [
-                {
-                    "role": "system",
-                    "content": (
-                        "Tu es un assistant expert. Réponds uniquement en te basant "
-                        "sur le contexte fourni. Si la réponse n'est pas dans le contexte, "
-                        "dis-le clairement."
-                    ),
-                },
-                {
-                    "role": "user",
-                    "content": f"Contexte extrait du PDF :\n{context}\n\nQuestion : {question}",
-                },
-            ],
-            temperature=0.2,
+            messages = messages,
+            temperature = 0.3, # Légèrement augmenté pour être un peu plus fluide dans la discussion
         )
-        return response.choices[0].message.content
+        
+        assistant_response = response.choices[0].message.content
+        
+        # 5. ON MET À JOUR L'HISTORIQUE POUR LE PROCHAIN TOUR
+        # On stocke une version "propre" de la question (sans le bloc de contexte) pour ne pas saturer la mémoire
+        history.append({"role": "user", "content": question})
+        # history.append({"role": "assistant", "content": assistant_response})
+        history.append({"role": "system", "content": assistant_response})
+        
+        return assistant_response
 
     def generate_question(self, context: str, client: Groq) -> str:
         """

@@ -42,6 +42,9 @@ def main():
     
     client = Groq(api_key=GROQ_API_KEY)
     
+    # Initialisation de la mémoire de l'historique
+    conversation_history = []
+
     while True:
         choix = menu()
 
@@ -50,8 +53,9 @@ def main():
             question = input("\nVotre question : ").strip()
             if not question:
                 continue
+            
             context = LLM.search(question, index, chunks, embedder)
-            reponse = LLM.ask(question, context, client)
+            reponse = LLM.ask(question, context, conversation_history, client)
             print(f"\nRéponse :\n{reponse}\n")
             
         # ── Mode 2 : Question ouverte générée par le LLM ──
