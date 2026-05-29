@@ -1,0 +1,23 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Résultats Quiz{% endblock %}
+
+{% block content %}
+<h1>Résultats du Quiz : {{ score }} / {{ total }}</h1>
+<br>
+<div class="results-container">
+    {% for item in historique %}
+    <div class="review-card" style="background: #ffffff; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid {% if item.user_choice == item.answer %}#28a745{% else %}#dc3545{% endif %};">
+        <h3>{{ loop.index }}. {{ item.question }}</h3>
+        <p>Votre choix : <strong>{{ item.user_choice }}</strong> | Bonne réponse : <strong>{{ item.answer }}</strong></p>
+        
+        <div class="ai-correction" style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-top: 10px;">
+            <strong>Analyse de l'assistant :</strong>
+            <p>{{ item.correction | safe }}</p>
+        </div>
+    </div>
+    {% endfor %}
+    
+    <a href="{{ url_for('qcm') }}" class="link" style="display: inline-block; margin-top: 20px;">Recommencer un Quiz</a>
+</div>
+{% endblock %}

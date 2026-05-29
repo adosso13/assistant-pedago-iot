@@ -20,30 +20,153 @@
             <a class="link" href="{{ url_for('challenge') }}">Nouveau Challenge</a>
         </div>
 
+        {% if current_user.is_authenticated %}
         <div class="sidebar-history">
-            <div class="section">
+            <ul class="section">
                 <p class="section-title">Chat récent</p>
-                <button class="btn-small"><p>Durée de la pin</p></button>
-                <button class="btn-small"><p>Durée de la pin</p></button>
-            </div>
-            <div class="section">
-                <p class="section-title">Challenge récent</p>
-                <button class="btn-small"><p>Durée de la pin</p></button>
-                <button class="btn-small"><p>Durée de la pin</p></button>
-            </div>
-            <div class="section">
-                <p class="section-title">Quiz récent</p>
-                <button class="btn-small">Durée de la pin</button>
-                <button class="btn-small">Durée de la pin</button>
-            </div>
-        </div>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+            </ul>
 
+            <ul class="section">
+                <p class="section-title">Challenge récent</p>
+                <li>
+                    <button class="btn-small"><p>Durée de la pin</p></button>
+                </li>
+                <li>
+                    <button class="btn-small"><p>Durée de la pin</p></button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+            </ul>
+
+            <ul class="section">
+                <p class="section-title">Quiz récent</p>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>                    
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        {% else %}
+        <div>
+        </div>
+        {% endif %}
+
+        {% if current_user.is_authenticated %}
         <div>
             <div><p>A</p></div>
-            <a href="{{ url_for('login') }}">Retour à l'accueil</a>
+            <a href="{{ url_for('logout') }}">Deconnexion</a>
         </div>
+        {% else %}
+        <div>
+            <div><p>A</p></div>
+            <a href="{{ url_for('login') }}">Connexion</a>
+        </div>
+        {% endif %}
     </aside>
-
     <aside class="asideId" id="sidebarmobile">
         <div class="navigateur">
             <a class="link" href="{{ url_for('home') }}">LOGO</a>
@@ -56,28 +179,52 @@
             <a class="link" href="{{ url_for('challenge') }}">Nouveau Challenge</a>
         </div>
 
+        {% if current_user.is_authenticated %}
         <div class="sidebar-history">
             <div class="section">
                 <p class="section-title">Chat récent</p>
-                <button class="btn-small"><p>Durée de la pin</p></button>
-                <button class="btn-small"><p>Durée de la pin</p></button>
+                <button class="btn-small">
+                    <p>Durée de la pin</p>
+                </button>
+                <button class="btn-small">
+                    <p>Durée de la pin</p>
+                </button>
             </div>
             <div class="section">
                 <p class="section-title">Challenge récent</p>
-                <button class="btn-small"><p>Durée de la pin</p></button>
-                <button class="btn-small"><p>Durée de la pin</p></button>
+                <button class="btn-small">
+                    <p>Durée de la pin</p>
+                </button>
+                <button class="btn-small">
+                    <p>Durée de la pin</p>
+                </button>
             </div>
             <div class="section">
                 <p class="section-title">Quiz récent</p>
-                <button class="btn-small">Durée de la pin</button>
-                <button class="btn-small">Durée de la pin</button>
+                <button class="btn-small">
+                    <p>Durée de la pin</p>
+                </button>
+                <button class="btn-small">
+                    <p>Durée de la pin</p>
+                </button>
             </div>
         </div>
+        {% else %}
+        <div>
+        </div>
+        {% endif %}
 
+        {% if current_user.is_authenticated %}
         <div>
             <div><p>A</p></div>
-            <a href="{{ url_for('login') }}">Retour à l'accueil</a>
+            <a href="{{ url_for('logout') }}">Deconnexion</a>
         </div>
+        {% else %}
+        <div>
+            <div><p>A</p></div>
+            <a href="{{ url_for('login') }}">Connexion</a>
+        </div>
+        {% endif %}
     </aside>
     
     <div>

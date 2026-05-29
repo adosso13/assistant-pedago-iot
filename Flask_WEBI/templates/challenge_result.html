@@ -1,0 +1,22 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Correction Challenge{% endblock %}
+
+{% block content %}
+<h1>Correction de votre Challenge</h1>
+<br>
+<div class="results-container">
+    <div class="review-card" style="background: #ffffff; padding: 20px; border-radius: 8px;">
+        <h3><strong>Question :</strong> {{ question }}</h3>
+        <p style="color: #555;"><strong>Votre réponse :</strong> {{ user_answer }}</p>
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+        
+        <h2>Évaluation de l'Assistant IoT :</h2>
+        <div class="ai-reply-content" style="background: #f4f6f9; padding: 20px; border-radius: 6px; border-left: 5px solid #007bff;">
+            {{ correction | safe }}
+        </div>
+    </div>
+    <br>
+    <a href="{{ url_for('challenge') }}" class="link">Tenter un autre challenge</a>
+</div>
+{% endblock %}

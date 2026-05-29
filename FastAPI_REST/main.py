@@ -49,16 +49,16 @@ def generate_question():
 
 @app.post("/evaluate_answer")
 def evaluate_answer(data: Form_Data):
-    
+
     question = data.user_question
     answer = data.user_answer
-    
+
     # Recherche du contexte pertinent pour évaluer la réponse
     context = LLM.search(question, index, chunks, embedder)
 
     # Evaluation de la réponse
     correction = LLM.evaluate_answer(question, answer, context, client)
-    
+
     return {"message": correction}
 
 

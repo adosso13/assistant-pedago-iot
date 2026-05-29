@@ -1,12 +1,19 @@
 aside {
     width: 300px;
+    height: 100vh;
+    left: 0;
+    top: 0;
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 15px;
+    padding-top: 60px;
+    padding-bottom: 100px;
     border-right: 1px solid rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease; /* Animation de glissement fluide */
     z-index: 999; /* Reste au-dessus du contenu sur mobile */
+    overflow-y: auto;
+    position:fixed;
 }
 
 .asideId{
@@ -30,8 +37,17 @@ aside {
 }
 
 aside > div:first-child {
+    width: 300px;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 15px;
     display: flex;
-}
+    align-items: center;
+    position: fixed;
+    gap: 10px;
+    top: 0;
+    left: 0;
+    background-color: #F5F5F5;}
 
 .asideId > div:first-child {
     display: flex;
@@ -59,7 +75,7 @@ aside > div:last-child {
     padding: 15px;
     display: flex;
     align-items: center;
-    position: absolute;
+    position: fixed;
     gap: 10px;
     bottom: 0;
     left: 0;

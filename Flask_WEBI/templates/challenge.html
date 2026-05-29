@@ -1,28 +1,21 @@
 {% extends "layout/base.html" %}
 
-{% block title %}Challenge{% endblock %}
+{% block title %}Challenge Ouvert{% endblock %}
 
 {% block content %}
-<h1>Questionnaire Développement Web</h1>
-<form class="questionnaire">
-    <!-- Question 1 -->
-    <p>1. Quel langage est utilisé pour structurer une page web ?</p>
-    <br>
-    <div>
-        <input type="radio" id="html" name="q1">
-        <label for="html">HTML</label>
+<h1>Challenge Question Ouverte</h1>
+<div class="questionnaire-container">
+    <p class="subtitle">Testez vos connaissances en rédigeant votre propre réponse.</p>
+    
+    <div class="challenge-box" style="background-color: var(--color-bg-secondary); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <p><strong>Question générée :</strong> {{ question }}</p>
     </div>
-    <br>
-    <div>
-        <input type="radio" id="python" name="q1">
-        <label for="python">Python</label>
-    </div>
-    <br>
-    <div>
-        <input type="radio" id="java" name="q1">
-        <label for="java">Java</label>
-    </div>
-    <br>
-    <button type="submit">Envoyer</button>
-</form>
+
+    <form class="question_poser" action="{{ url_for('challenge') }}" method="POST">
+        <input type="hidden" name="question" value="{{ question }}">
+        
+        <textarea name="user_answer" placeholder="Rédigez votre réponse détaillée ici..." required style="width: 100%; min-height: 120px; margin-bottom: 15px;"></textarea>
+        <button type="submit">Soumettre pour correction</button>
+    </form>
+</div>
 {% endblock %}

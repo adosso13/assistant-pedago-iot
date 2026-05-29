@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.layout {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+/* ASIDE */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    background: #202123;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+/* Bouton nouveau chat */
+.new-chat {
+    margin: 15px 0;
+    padding: 10px;
+    background: #343541;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.new-chat:hover {
+    background: #444654;
+}
+
+/* chaque groupe */
+.group {
+    margin-top: 15px;
+}
+
+.group h3 {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+/* Historique */
+/* zone scrollable */
+/*
+.history {
+    list-style: none;
+    flex: 1;
+    overflow-y: auto;   
+    padding-right: 5px;
+}
+
+.history li {
+    padding: 8px;
+    background: #343541;
+    border-radius: 6px;
+    cursor: pointer;
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}*/
+
+.group ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
+}
+
+.group li {
+    padding: 8px;
+    background: #343541;
+    border-radius: 6px;
+    cursor: pointer;
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.group li:hover {
+    background: #444654;
+}
+
+/* MAIN */
+.content {
+    flex: 1;
+    background-color: #f5f5f5;
+    padding: 20px;
+}

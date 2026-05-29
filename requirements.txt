@@ -72,3 +72,5 @@ Werkzeug==3.1.8
 python-dotenv==1.2.2
 Flask-Login==0.6.3
 fastapi==0.136.1
+uvicorn==0.47.0
+Flask-SQLAlchemy==3.1.1
