@@ -1,13 +1,16 @@
 import os
 import random  # Nécessaire pour piocher des morceaux de texte au hasard
+
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, flash, session  # Ajout de session
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from agent_LLM import agent
+
 from sentence_transformers import SentenceTransformer
 from groq import Groq
-from models import db, User, QuizSession, QuizAnswer
+
+from models import db, User, QuizSession, QuizAnswer, ChallengeResult, SubmitLLM
 
 load_dotenv()
 
@@ -88,26 +91,59 @@ def submit():
     question = request.form.get('question')
     if not question:
         return redirect(url_for('home'))
-
+    
     context = LLM.search(question, index, chunks, embedder)
-    reponse = LLM.ask(question, context, client)
+    reponse = LLM.ask(question, context, [], client)  # ← [] pour history vide
+
+     # ── Sauvegarder en BDD ──
+    try:
+        entry = SubmitLLM(
+            user_id  = current_user.id,
+            question = question,
+            answer   = reponse
+        )
+        db.session.add(entry)
+        db.session.commit()
+        print("✓ SubmitLLM sauvegardé")
+    except Exception as e:
+        db.session.rollback()
+        print(f"✗ Erreur BDD : {e}")
+
     return render_template('response.html', question=question, reponse=reponse)
 
 
 # ─── MODE 2 : CHALLENGE (QUESTION OUVERTE) ───
 @app.route('/challenge', methods=['GET', 'POST'])
+@login_required
 def challenge():
     if request.method == 'POST':
-        # L'utilisateur soumet sa réponse textuelle
-        question = request.form.get('question')
+        question    = request.form.get('question')
         user_answer = request.form.get('user_answer')
-        
-        context = LLM.search(question, index, chunks, embedder)
+
+        context    = LLM.search(question, index, chunks, embedder)
         correction = LLM.evaluate_answer(question, user_answer, context, client)
-        
-        return render_template('challenge_result.html', question=question, user_answer=user_answer, correction=correction)
-    
-    # En GET : on génère une question ouverte à partir d'un chunk aléatoire
+
+        # ── Sauvegarder en BDD ──
+        try:
+            result = ChallengeResult(
+                user_id     = current_user.id,
+                question    = question,
+                user_answer = user_answer,
+                correction  = correction
+            )
+            db.session.add(result)
+            db.session.commit()
+            print("✓ ChallengeResult sauvegardé")  # ← ajoute
+
+        except Exception as e:
+            db.session.rollback()
+            print(f"✗ Erreur BDD : {e}")
+
+        return render_template('challenge_result.html',
+                               question=question,
+                               user_answer=user_answer,
+                               correction=correction)
+
     chunk_aleatoire = random.choice(chunks)
     question = LLM.generate_question(chunk_aleatoire, client)
     return render_template('challenge.html', question=question)
@@ -115,6 +151,7 @@ def challenge():
 
 # ─── MODE 3 : QUIZ QCM SIMULÉ (5 QUESTIONS) ───
 @app.route('/qcm', methods=['GET', 'POST'])
+@login_required
 def qcm():
     # Accès initial (GET) -> On prépare une liste de 5 questions QCM dans la session
     if request.method == 'GET':
@@ -157,10 +194,9 @@ def qcm():
     questions = session.get('qcm_questions', [])
 
     if current_idx >= len(questions):
-        # Fin du quiz : calcul et récupération des corrections RAG détaillées
-        score_final = session.get('qcm_score', 0)
+        score_final     = session.get('qcm_score', 0)
         total_questions = len(questions)
-        historique = session.get('qcm_historique', [])
+        historique      = session.get('qcm_historique', [])
         
         for item in historique:
             context = LLM.search(item['question'], index, chunks, embedder)
@@ -168,7 +204,33 @@ def qcm():
                 item['question'], item['choices'],
                 item['answer'], item['user_choice'], context, client
             )
-            
+
+        # ── Sauvegarder en BDD ──
+        try:
+            quiz_session = QuizSession(
+                user_id = current_user.id,
+                score   = score_final,
+                total   = total_questions
+            )
+            db.session.add(quiz_session)
+            db.session.flush()  # génère quiz_session.id sans commit
+
+            for item in historique:
+                answer = QuizAnswer(
+                    session_id     = quiz_session.id,
+                    question       = item['question'],
+                    user_choice    = item['user_choice'],
+                    correct_answer = item['answer'],
+                    is_correct     = item['user_choice'] == item['answer']
+                )
+                db.session.add(answer)
+
+            db.session.commit()
+            print("✓ QCMResult sauvegardé")  # ← ajoute
+        except Exception as a:
+            db.session.rollback()
+            print(f"✗ Erreur BDD : {a}")
+
         # Nettoyage
         session.pop('qcm_questions', None)
         return render_template('qcm_result.html', score=score_final, total=total_questions, historique=historique)
@@ -176,6 +238,28 @@ def qcm():
     qcm_actuel = questions[current_idx]
     return render_template('qcm.html', qcm=qcm_actuel, numero=current_idx + 1)
 
+
+@app.route('/qcm_page')
+def qcm_page():
+    return render_template('qcm_page.html')
+
+
+@app.route('/historique')
+@login_required
+def historique():
+    challenges = ChallengeResult.query.filter_by(user_id=current_user.id)\
+        .order_by(ChallengeResult.date.desc()).all()
+    
+    quiz_sessions = QuizSession.query.filter_by(user_id=current_user.id)\
+        .order_by(QuizSession.date.desc()).all()
+    
+    submits = SubmitLLM.query.filter_by(user_id=current_user.id)\
+        .order_by(SubmitLLM.date.desc()).all()
+    
+    return render_template('historique.html', 
+                           challenges=challenges, 
+                           quiz_sessions=quiz_sessions, 
+                           submits=submits)
 
 if __name__ == '__main__':
     # use_reloader=False évite que l'agent s'initialise 2 fois de suite au démarrage en mode debug

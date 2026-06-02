@@ -1,5 +1,5 @@
 import os
-import sys
+
 import PyPDF2
 import faiss
 import numpy as np

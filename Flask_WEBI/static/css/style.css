@@ -161,7 +161,7 @@ textarea {
     outline: none;
 }
 
-p{
+p, summary{
     font-size: 14px;
 }
 

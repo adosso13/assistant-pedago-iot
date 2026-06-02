@@ -15,6 +15,7 @@ class User(UserMixin, db.Model):
     # Relations
     quiz_sessions    = db.relationship('QuizSession', backref='user', lazy=True)
     challenge_results = db.relationship('ChallengeResult', backref='user', lazy=True)
+    submit_llm        = db.relationship('SubmitLLM', backref='user', lazy=True)  # ← ajoute
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -65,3 +66,17 @@ class ChallengeResult(db.Model):
 
     def __repr__(self):
         return f'<ChallengeResult user={self.user_id}>'
+    
+
+# ─── SUBMIT RESULT ─────────────────────────────────────────────────────────
+class SubmitLLM(db.Model):
+    __tablename__ = 'submit_llm'
+
+    id          = db.Column(db.Integer, primary_key=True)
+    user_id     = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    question    = db.Column(db.Text, nullable=False)
+    answer      = db.Column(db.Text, nullable=False)
+    date        = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<SubmitLLM user={self.user_id}>'

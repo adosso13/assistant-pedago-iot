@@ -15,140 +15,46 @@
         
         <div class="sidebar-actions">
             <button class="btn btnresearch"><p>Recherche</p></button>
-            <a class="link" href="{{ url_for('home') }}">Nouveau chat</a>
-            <a class="link" href="{{ url_for('qcm') }}">Nouveau Quiz</a>
-            <a class="link" href="{{ url_for('challenge') }}">Nouveau Challenge</a>
+            <a class="link" href="{{ url_for('home') }}"><p>Nouveau chat</p></a>
+            <a class="link" href="{{ url_for('qcm') }}"><p>Nouveau Quiz</p></a>
+            <a class="link" href="{{ url_for('challenge') }}"><p>Nouveau Challenge</p></a>
+            <a class="link" href="{{ url_for('historique') }}"><p>Historique</p></a>
         </div>
 
         {% if current_user.is_authenticated %}
         <div class="sidebar-history">
-            <ul class="section">
-                <p class="section-title">Chat récent</p>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-            </ul>
+            <details>
+                <summary>Chat récent</summary>
+                <ul class="section">
+                    <li>
+                        <button class="btn-small">
+                            <p>Durée de la pin</p>
+                        </button>                    
+                    </li>
+                </ul>
+            </details>
 
-            <ul class="section">
-                <p class="section-title">Challenge récent</p>
-                <li>
-                    <button class="btn-small"><p>Durée de la pin</p></button>
-                </li>
-                <li>
-                    <button class="btn-small"><p>Durée de la pin</p></button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-            </ul>
+            <details>
+                <summary>Challenge récent</summary>
+                <ul class="section">
+                    <li>
+                        <button class="btn-small">
+                            <p>Durée de la pin</p>
+                        </button>                    
+                    </li>
+                </ul>
+            </details>
 
-            <ul class="section">
-                <p class="section-title">Quiz récent</p>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>                    
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn-small">
-                        <p>Durée de la pin</p>
-                    </button>
-                </li>
-            </ul>
+            <details>
+                <summary>QCM réponses</summary>
+                <ul class="section">
+                    <li>
+                        <button class="btn-small">
+                            <p>Durée de la pin</p>
+                        </button>                    
+                    </li>
+                </ul>
+            </details>
         </div>
         {% else %}
         <div>
@@ -177,37 +83,35 @@
             <a class="link" href="{{ url_for('home') }}">Nouveau chat</a>
             <a class="link" href="{{ url_for('qcm') }}">Nouveau Quiz</a>
             <a class="link" href="{{ url_for('challenge') }}">Nouveau Challenge</a>
+            <a class="link" href="{{ url_for('historique') }}">Historique</a>
         </div>
 
         {% if current_user.is_authenticated %}
         <div class="sidebar-history">
-            <div class="section">
+            <ul class="section">
                 <p class="section-title">Chat récent</p>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>
-            </div>
-            <div class="section">
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>                    
+                </li>
+            </ul>
+            <ul class="section">
                 <p class="section-title">Challenge récent</p>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>
-            </div>
-            <div class="section">
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>                    
+                </li>
+            </ul>
+            <ul class="section">
                 <p class="section-title">Quiz récent</p>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>
-                <button class="btn-small">
-                    <p>Durée de la pin</p>
-                </button>
-            </div>
+                <li>
+                    <button class="btn-small">
+                        <p>Durée de la pin</p>
+                    </button>                    
+                </li>
+            </ul>
         </div>
         {% else %}
         <div>

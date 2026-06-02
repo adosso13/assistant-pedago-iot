@@ -1,0 +1,80 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<h1>Mon Historique</h1>
+
+<!-- ── CHALLENGES ── -->
+<section>
+    <h2>Challenges (Questions ouvertes)</h2>
+
+    {% if challenges %}
+        {% for c in challenges %}
+        <div style="background: var(--color-bg-secondary); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+            <p><strong>Date :</strong> {{ c.date.strftime('%d/%m/%Y %H:%M') }}</p>
+            <p><strong>Question :</strong> {{ c.question }}</p>
+            <p><strong>Ta réponse :</strong> {{ c.user_answer }}</p>
+            <details>
+                <summary>Voir la correction</summary>
+                <div style="margin-top: 10px;">{{ c.correction | safe }}</div>
+            </details>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Aucun challenge effectué pour l'instant.</p>
+    {% endif %}
+</section>
+
+<hr style="margin: 30px 0;">
+
+<!-- ── QUIZ QCM ── -->
+<section>
+    <h2>Quiz QCM</h2>
+
+    {% if quiz_sessions %}
+        {% for qs in quiz_sessions %}
+        <div style="background: var(--color-bg-secondary); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+            <p><strong>Date :</strong> {{ qs.date.strftime('%d/%m/%Y %H:%M') }}</p>
+            <p><strong>Score :</strong> {{ qs.score }} / {{ qs.total }}</p>
+            <details>
+                <summary>Voir les réponses</summary>
+                {% for a in qs.answers %}
+                <div style="margin: 10px 0; padding: 10px; border-left: 4px solid {% if a.is_correct %}#28a745{% else %}#dc3545{% endif %};">
+                    <p><strong>Question :</strong> {{ a.question }}</p>
+                    <p><strong>Ta réponse :</strong> {{ a.user_choice }} 
+                       {% if a.is_correct %}✓{% else %}✗ (correct : {{ a.correct_answer }}){% endif %}
+                    </p>
+                </div>
+                {% endfor %}
+            </details>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Aucun quiz effectué pour l'instant.</p>
+    {% endif %}
+</section>
+
+
+<hr style="margin: 30px 0;">
+
+
+<section>
+    <h2>Questions libres</h2>
+
+    {% if submits %}
+        {% for s in submits %}
+        <div style="background: var(--color-bg-secondary); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+            <p><strong>Date :</strong> {{ s.date.strftime('%d/%m/%Y %H:%M') }}</p>
+            <p><strong>Question :</strong> {{ s.question }}</p>
+            <details>
+                <summary>Voir la réponse</summary>
+                <div style="margin-top: 10px;">{{ s.answer | safe }}</div>
+            </details>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Aucune question posée pour l'instant.</p>
+    {% endif %}
+</section>
+
+
+{% endblock %}
